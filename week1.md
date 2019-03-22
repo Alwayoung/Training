@@ -1,15 +1,46 @@
-## slack + hubot 搭建聊天机器人  
+# slack + hubot 搭建聊天机器人初试  
+## windows 尝试  
+### hubot
 #### 1.安装 node.js 和 npm  
 （1）在nodejs官网下载与电脑版本对应的nodejs版本，并安装。  
-（2）nodejs里会自带npm,不过版本比较低，需要升级，使用的命令是 ``` npm install npm@latest -g ```。  
+（2）nodejs里会自带npm,不过版本比较低，需要升级，使用的命令是 ```npm install npm@latest -g ```。  
 #### 2.安装 hubot  
-使用命令``` npm install -g yo generator-hubot ```。   
+使用命令```npm install -g yo generator-hubot ```。   
 #### 3.生成自己的 hubot  
 使用的命令：
-```  
+```
 mkdir myhubot  
 cd myhubot  
 yo hubot  
 ```   
 
-4.
+此时出现如图：  
+![1](https://img-blog.csdnimg.cn/20190323002353709.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L05pY29sZVJvc2U=,size_16,color_FFFFFF,t_70)  
+以及Owner，name，adapter等等信息，其中adapter填了 slack。    
+#### 4.启动myhubot    
+windows下直接执行hubot命令   
+ `bin\hubot.cmd
+  `  
+  但是此时就出现了问题：  
+  `body-parser deprecated undefined extended: provide extended option node_modules\hubot\src\robot.js:447:21`   
+  我去查了很多资料都没有解决这个问题，所以 hubot 的部分先暂停在这里。   
+  ### slack    
+  #### 1.配置 slack  
+在 slack 官网注册账号，然后进入 APP Directory，搜索 “hubot”，并安装。（这里我才发现似乎前面并不需要提前安装 hubot ,不过已经安装了，也就记录在里面了。）  在安装 hubot 的过程中，要给机器人起个名字、填写基本信息，最重要的是获取后面要用到的 API Token，记录好Token。    
+#### 2.连接slack 和 hubot    
+教程里表示使用如下命令：    
+```
+HUBOT_SLACK_TOKEN= API Token ./bin/hubot --adapter slack
+```  
+（这里的 API Token 就是上文提到的。）  
+但是提示 “HUBOT” 不是内部命令或文件。因为该教程是 Linux 上安装 hubot + slack 的。网上有人说需要将 “HUBOT_SLACK_TOKEN” 设置为环境变量，即：  
+![2](https://img-blog.csdnimg.cn/20190323004301871.png)  
+此外，还需要设置环境变量：  
+![3](https://img-blog.csdnimg.cn/20190323004647524.png)  
+但是我还是不清楚要使用什么命令连接 slack 和 hubot ......甚至再次运行`bin\hubot.cmd  
+`时，又增加了新的错误` GMT+0800 (GMT+08:00)] ERROR Cannot load adapter Campfire - Error: Cannot find module 'hubot-Campfire'`......  
+windows 上实现 slack + hubot 聊天机器人好难啊，教程也没有，出错也找不到解决办法，感觉就是两眼一抹黑...然后我决定去虚拟机试一试。    
+## 虚拟机尝试    
+好久没有用过虚拟机了，打开后发现无法连接网络，在查找了很多解决办法后，还是没能连接成功。最后我选择了卸载重新安装。安装好之后就可以联网了。    
+#### 首先安装 nodejs 和 npm    
+
